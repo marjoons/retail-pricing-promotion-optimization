@@ -1,0 +1,4 @@
+diagnostic,statistic,p_value,interpretation
+First-stage relevance statistic,1773.8441759780108,0.0,Tests joint relevance of excluded instruments
+Wu-Hausman,524.3915208440299,1.1102230246251565e-16,Tests whether price can be treated as exogenous
+Wooldridge overidentification,0.004840858303651885,0.9445309194833716,Tests the overidentifying restriction

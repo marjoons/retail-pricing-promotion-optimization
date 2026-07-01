@@ -112,10 +112,19 @@ def generate_retail_data() -> pd.DataFrame:
             )
 
             for product in PRODUCTS.itertuples(index=False):
+                
+                
+                latent_demand_shock = rng.normal(0, 0.18)
+                cost_pass_through = (
+                0.80 * (supplier_cost_index - 1)
+                + 0.50 * (shipping_cost_index - 1)
+                )
                 regular_price = product.base_price * (
-                    1
-                    + 0.015 * annual_seasonality
-                    + rng.normal(0, 0.012)
+                1
+                + 0.015 * annual_seasonality
+                + cost_pass_through
+                + 0.12 * latent_demand_shock
+                + rng.normal(0, 0.010)
                 )
 
                 promotion_propensity = np.clip(
@@ -209,14 +218,15 @@ def generate_retail_data() -> pd.DataFrame:
                 )
 
                 expected_demand = (
-                    product.base_daily_demand
-                    * store.demand_factor
-                    * price_effect
-                    * competitor_effect
-                    * traffic_effect
-                    * seasonal_effect
-                    * promotion_uplift
-                    * advertising_effect
+                product.base_daily_demand
+                * store.demand_factor
+                * price_effect
+                * competitor_effect
+                * traffic_effect
+                * seasonal_effect
+                * promotion_uplift
+                * advertising_effect
+                * np.exp(latent_demand_shock)
                 )
 
                 expected_demand = max(expected_demand, 0.10)

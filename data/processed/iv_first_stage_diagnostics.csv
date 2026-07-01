@@ -1,0 +1,2 @@
+endogenous_variable,rsquared,partial.rsquared,shea.rsquared,f.stat,f.pval,f.dist
+log_selling_price,0.992534912242973,0.14153536467728556,0.14153536467565267,1773.8441759780108,0.0,chi2(2)
