@@ -1,1 +1,2 @@
-linearmodels
+linearmodelsxgboost
+joblib
